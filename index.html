@@ -1,23 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BasobooSMP Gaming Website</title>
-  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
+    .modalText {
+      color: #FFC107
+    }
+
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+      background-color: #2B6027;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+
+    /* The Close Button */
+    .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
     body, html {
       font-family: 'Arial', sans-serif;
       background-color: #1b3d1a;
       color: #fff;
       height: 100%;
       overflow-x: hidden;
-      border: 5px solid #ffc107; /* Gele rand rondom de site */
-      box-sizing: border-box; /* Zorgt ervoor dat padding en rand in de totale breedte worden meegerekend */
+      border: 5px solid #ffc107;
+      box-sizing: border-box;
     }
-
-    /* Header styling */
     header {
       width: 100%;
       display: flex;
@@ -26,205 +66,209 @@
       background-color: #2b6027;
       padding: 20px;
     }
-
     header h1 {
       font-size: 24px;
-      color: #ffc107; /* Geel accent */
+      color: #ffc107;
     }
-
     nav a {
-      color: #ffc107; /* Geel accent */
+      color: #ffc107;
       text-decoration: none;
       margin-left: 20px;
       font-size: 16px;
-      transition: color 0.3s; /* Zorgt voor een vloeiende overgang */
+      transition: color 0.3s;
     }
-
     nav a:hover {
-      color: #e6ac00; /* Donkerder geel bij hover */
+      color: #e6ac00;
     }
-
-    /* Hero section */
     .hero {
       display: flex;
-      flex-direction: column; /* Standaard als kolom */
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 50px 20px; /* Padding voor mobiel */
+      padding: 50px 20px;
       background-color: #246f34;
-      text-align: center; /* Centreert de tekst */
+      text-align: center;
     }
-
     .hero-content {
-      display: flex; /* Flex-container voor tekst en video */
-      flex-direction: row; /* Horizontaal uitlijnen */
-      align-items: flex-start; /* Bovenaan uitlijnen */
-      justify-content: center; /* Centreert de inhoud */
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
       width: 100%;
     }
-
     .hero-text {
-      max-width: 50%; /* Maximale breedte van de tekst */
-      margin-right: 20px; /* Ruimte tussen tekst en video */
+      max-width: 50%;
+      margin-right: 20px;
     }
-
     .hero-text h2 {
-      font-size: 36px; /* Grotere tekst op desktop */
-      color: #ffc107; /* Geel accent */
+      font-size: 36px;
+      color: #ffc107;
     }
-
     .hero-text p {
       font-size: 18px;
       margin-top: 20px;
     }
-
     .cta-button {
       padding: 15px 30px;
-      background-color: #ffc107; /* Geel accent */
-      color: #1b3d1a; /* Donkergroen voor contrast */
+      background-color: #ffc107;
+      color: #1b3d1a;
       font-size: 18px;
       border: none;
       margin-top: 20px;
       cursor: pointer;
     }
-
     .cta-button:hover {
       background-color: #e6ac00;
     }
-
-    /* Video styling */
     .video-container {
       width: 100%;
-      max-width: 600px; /* Maximum breedte voor desktop */
-      height: auto; /* Houdt de hoogte automatisch */
-      aspect-ratio: 16 / 9; /* Houdt de juiste verhouding */
-      margin: 20px 0; /* Ruimte boven en onder de video */
+      max-width: 600px;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      margin: 20px 0;
     }
-
     .video-container iframe {
       width: 100%;
-      height: 100%; /* Houdt de juiste hoogte */
-      border: none; /* Verwijder de rand */
+      height: 100%;
+      border: none;
     }
-
-    /* Stats section */
     .stats {
       display: flex;
-      flex-wrap: wrap; /* Zorgt ervoor dat elementen kunnen wrapen */
-      justify-content: center; /* Centreert de inhoud */
+      flex-wrap: wrap;
+      justify-content: center;
       background-color: #2b6027;
       padding: 20px 0;
     }
-
     .stats div {
       text-align: center;
-      flex: 1 1 30%; /* Zorgt ervoor dat elementen zich aanpassen */
-      margin: 10px; /* Ruimte tussen de stat secties */
+      flex: 1 1 30%;
+      margin: 10px;
     }
-
     .stats h3 {
       font-size: 36px;
       color: #ffc107;
     }
-
     .stats p {
       font-size: 16px;
     }
-
-    /* Footer */
     footer {
       background-color: #2b6027;
       text-align: center;
       padding: 20px;
     }
-
     @media (max-width: 768px) {
       .hero {
-        padding: 20px; /* Minder padding op kleinere schermen */
+        padding: 20px;
       }
-
       .hero-content {
-        flex-direction: column; /* Stapel elementen onder elkaar */
-        align-items: center; /* Centreert de inhoud */
-        text-align: center; /* Centreert tekst op kleine schermen */
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
       }
-
       .hero-text {
-        max-width: 100%; /* Maximale breedte van de tekst */
-        margin-right: 0; /* Geen ruimte tussen tekst en video */
+        max-width: 100%;
+        margin-right: 0;
       }
-
       .video-container {
-        margin-top: 20px; /* Ruimte boven de video */
+        margin-top: 20px;
       }
-
       .stats {
-        flex-direction: column; /* Zorg dat de stat sectie onder elkaar staat */
-        align-items: center; /* Centreert de inhoud */
+        flex-direction: column;
+        align-items: center;
       }
-
       .stats div {
-        width: 100%; /* Volledige breedte voor elk item op mobiele apparaten */
+        width: 100%;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
   <header>
     <h1>BasobooSMP</h1>
     <nav>
-      <a href="#">Home</a>
-      <a href="#">Rules</a>
-      <a href="#">Features</a>
-      <a href="#">Contact</a>
+      <a href="index.html">Home</a>
+      <a href="regels.html">Regels</a>
+      <a href="functies.html">Functies</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <!-- Hero Section (Main Content) -->
   <div class="hero">
     <div class="hero-content">
       <div class="hero-text">
-        <h2>Welcome to BasobooSMP!</h2>
-        <p>Join our community of Minecraft players, explore new worlds, and build amazing creations on our SMP server. Fun, creativity, and challenges await!</p>
-        <button class="cta-button">Start Playing</button>
+        <h2>Welkom bij BasobooSMP!</h2>
+        <p>Sluit je aan bij onze community van Minecraft-spelers, verken nieuwe werelden en bouw geweldige creaties op onze SMP-server. Plezier, creativiteit en uitdagingen wachten op je!</p>
+        <button id="myBtn" class="cta-button">Begin met spelen</button>
+        <div id="myModal" class="modal">
+
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p class="modalText">Hoe join je onze server?<br />
+              <b>IP: </b>play.example.com
+            </p>
+          </div>
+
+        </div>
       </div>
       <div class="video-container">
-        <iframe 
-          src="https://www.youtube.com/embed/6hMwiU0C5hc?autoplay=1&controls=0&rel=0&modestbranding=1&cc_load_policy=0" 
-          title="YouTube video player" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen>
+        <iframe src="https://www.youtube.com/embed/6hMwiU0C5hc?autoplay=1&controls=0&rel=0&modestbranding=1&cc_load_policy=0"
+                title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
         </iframe>
       </div>
     </div>
   </div>
 
-  <!-- Stats Section -->
   <section class="stats">
     <div>
       <h3>1</h3>
-      <p>Ding 1</p>
+      <p>Server uptime</p>
     </div>
     <div>
       <h3>2</h3>
-      <p>Ding 2</p>
+      <p>Actieve spelers</p>
     </div>
     <div>
       <h3>3</h3>
-      <p>Ding 3</p>
+      <p>Gemaakte creaties</p>
     </div>
   </section>
 
-  <!-- Footer -->
   <footer>
-    &copy; 2024 BasobooSMP. All Rights Reserved.
+    &copy; 2024 BasobooSMP. Alle rechten voorbehouden.
   </footer>
 
-  <!-- Bootstrap JS (optional) -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+  // Get the modal
+  var modal = document.getElementById("myModal");
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks the button, open the modal 
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+  </script>
 </body>
 </html>
